@@ -1,6 +1,6 @@
 //Alejandro Marcovich
 //Data Structures
-public class BST
+public class BST<T>
 {
 	public int size;
 	public Node head;
@@ -11,13 +11,12 @@ public class BST
 	}
 	public class Node
 	{
-		int data; 
+		Comparable data; 
 		Node right;
 		Node left;
-		Node(int i)
+		Node(Comparable i)
 		{
 			size=0;
-			head=null;
 			data=i;
 			right=null;
 			left=null;
@@ -26,17 +25,17 @@ public class BST
 	/*
 	Function finds a node with the given value in the binary search tree.
 	*/
-	public boolean find(int x)
+	public boolean find(Comparable x)
 	{
 		return find( x, head);
 	}
-	public boolean find(int x,Node root)
+	public boolean find(Comparable x,Node root)
 	{
 		if (root==null)
 			return false;
-		if(root.data==x)
+		if(root.data.compareTo(x)==0)
 			return true;
-		if(root.data<x)
+		if(root.data.compareTo(x)<0)
 			return find(x,root.right);
 		else
 			return find(x,root.left);
@@ -44,18 +43,27 @@ public class BST
 	/*This function inserts a node at a given
 	*position.
 	*/
-	public void insert(int x)
+	public void insert(Comparable x)
 	{
 		head=insert(x, head);
 	}
-	public Node insert(int x,Node root)
+	public Node insert(Comparable x,Node root)
 	{
 		// Node n=root;
 		if (root==null)
 		{
 			return new Node(x);
 		}
-		if(x==root.data || root.data>x)
+		if(root.data.compareTo(x)<=0)
+		{
+			root.right=insert(x,root.right);
+			return root;
+		}
+		else{
+			root.left=insert(x,root.left);
+			return root;
+		}
+		/*if(root.data.compareTo(x)<=0)
 		{
 			root.left=insert(x,root.left);
 			return root;
@@ -64,7 +72,7 @@ public class BST
 		{
 			root.right=insert(x,root.right);
 			return root;
-		}
+		}*/
 	}
 	/*This function prints out all the values in the node
 	*going from least to greatest value.
@@ -84,11 +92,11 @@ public class BST
 	}
 	/* Deletes the node at a given position.
 	*/
-	public void delete(int x)
+	public void delete(Comparable x)
 	{
 		head=delete( x, head);
 	}
-	public Node delete(int x,Node root)
+	public Node delete(Comparable x,Node root)
 	{
 		if (root == null)
 			return null;
@@ -127,11 +135,11 @@ public class BST
 	/*Function finds the smallest value 
 	*between two children.
 	*/
-	public int removesmallest(Node node)
+	public Comparable removesmallest(Node node)
 	{
 		if(node.left.left==null)
 		{
-			int smallest=node.left.data;
+			Comparable smallest=node.left.data;
 			node.left=node.left.right;
 			return smallest;
 		}
