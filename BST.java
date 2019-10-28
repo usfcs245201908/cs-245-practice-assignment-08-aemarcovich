@@ -1,3 +1,5 @@
+//Alejandro Marcovich
+//Data Structures
 public class BST
 {
 	public int size;
@@ -21,6 +23,9 @@ public class BST
 			left=null;
 		}
 	}
+	/*
+	Function finds a node with the given value in the binary search tree.
+	*/
 	public boolean find(int x)
 	{
 		return find( x, head);
@@ -36,6 +41,9 @@ public class BST
 		else
 			return find(x,root.left);
 	}
+	/*This function inserts a node at a given
+	*position.
+	*/
 	public void insert(int x)
 	{
 		head=insert(x, head);
@@ -58,6 +66,9 @@ public class BST
 			return root;
 		}
 	}
+	/*This function prints out all the values in the node
+	*going from least to greatest value.
+	*/
 	public void print()
 	{
 		print(head);
@@ -71,6 +82,8 @@ public class BST
 			print(root.right);
 		}
 	}
+	/* Deletes the node at a given position.
+	*/
 	public void delete(int x)
 	{
 		head=delete( x, head);
@@ -111,6 +124,9 @@ public class BST
 			return root;
 		}
 	}
+	/*Function finds the smallest value 
+	*between two children.
+	*/
 	public int removesmallest(Node node)
 	{
 		if(node.left.left==null)
